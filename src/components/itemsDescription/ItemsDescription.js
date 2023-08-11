@@ -37,13 +37,13 @@ const ItemsDescriptions = () => {
     <section className="bg-white">
       {item && (
         <div className="flex flex-col m-2">
-          <div className="flex mt-2">
+          <div className="flex mt-2 justify-around">
             <img
               alt={"item"}
               src={item.pictures[0].secure_url}
-              width={"400px"}
+              width={"300px"}
             />
-            <div className="flex flex-col m-2 space-y-4 w-full">
+            <div className="flex flex-col m-2 space-y-4">
               <div className="space-x-2 text-sm text-slate-400">
                 <span>{item.condition === "new" ? "Nuevo" : "Usado"}</span>
                 <span>{item.sold_quantity} Vendidos</span>

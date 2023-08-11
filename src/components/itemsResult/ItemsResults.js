@@ -11,10 +11,9 @@ const ItemsResults = () => {
 
   const [items, setItems] = useState(null)
 
-
   let limitedItems = []
-
-    useEffect(() => {
+  
+  useEffect(() => {
         async function fetchData(item) {
             try {
               const result = await searchItems(item);
@@ -25,38 +24,42 @@ const ItemsResults = () => {
       }
       fetchData(searchQuery)
     }, [searchQuery])
-
+    
     useMemo(() => {
-        if(items !== null){
-            for (let i = 0; i < 4; i++) {
-                limitedItems.push(items[i]);
-              }
+      if(items !== null && items.length !== 0){
+        for (let i = 0; i < 4; i++) {
+          limitedItems.push(items[i]);
         }
-    }, [items])
-
-    console.log(limitedItems)
+      }
+    }, [items, limitedItems])
 
   return (
     <section className="bg-white space-y-4">
-      {limitedItems.length !== 0 &&
-        limitedItems.map((item) => {
+      {limitedItems.length !== 0 ?
+        limitedItems.map((item, index) => {
           return (
-            <Link className="flex" key={item.catalog_product_id} to={`/items/${item.id}`}>
+            <Link className="flex" key={item.id} to={`/items/${item?.id}`}>
               <img
-                src={item.thumbnail}
+                src={item?.thumbnail}
                 alt="item-logo"
                 width="200px"
                 height="200px"
                 className="object-fit m-2"
               />
               <div className="flex flex-col w-full ml-4">
-                <span className="font-semibold text-lg mt-4">{priceFormat(item.price)}</span>
-                <span className="self-end bg-slate-100 p-1 mr-2 text-slate-500">{item.address.state_name}</span>
-                <h2 className="text-lg -mt-5">{item.title}</h2>
+                <span className="font-semibold text-lg mt-4">{priceFormat(item?.price)}</span>
+                <span className="self-end bg-slate-100 p-1 mr-2 text-slate-500">{item?.address.state_name}</span>
+                <h2 className="text-lg -mt-5">{item?.title}</h2>
               </div>
             </Link>
           );
-        })}
+        }) :
+        <div className="flex items-center justify-center h-[500px]">
+          <span className="font-bold  text-2xl">
+            Please enter a valid search
+          </span>
+        </div>
+        }
     </section>
   );
 };

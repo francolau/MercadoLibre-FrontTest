@@ -15,11 +15,11 @@ const Header = () => {
         </a>
         <input
           placeholder="Nunca dejes de buscar"
-          className="pl-2 w-full outline-none h-[25px]"
+          className="pl-2 w-full outline-none h-[25px] rounded-s-xl "
           onChange={(e) => setSearch(e.target.value)}
         />
         <Link
-          className="flex bg-slate-300 items-center h-[25px] px-2"
+          className="flex bg-slate-300 items-center h-[25px] px-2 rounded-e-xl"
           to={`/items?search=${search}`}
         >
           <SearchIcon />
